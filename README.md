@@ -59,6 +59,10 @@ Finally deploy the plausible app (and postgres service) with `fly deploy`.
 
 Success! You should now be able to access the plausible application, create accounts and start adding websites to track traffic.
 
+> [!NOTE]
+> I chose 1gB each for the clickhouse db and the plausible js app purely because the requirements listed by plausible were 2-4gB on a shared machine.
+> This might need adjusted?
+
 # Adding websites
 
 To follow maybe...
