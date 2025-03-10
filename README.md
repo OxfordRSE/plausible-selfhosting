@@ -31,6 +31,10 @@ Choose the appropriate settings, in particular fly will default to your personal
 
 When you hit submit control will be returned to your terminal, finshing the configuration.
 
+Next make a volume for the analytics data:
+
+`flyctl volumes create plausible_clickhouse_data --region lhr --size 1`
+
 Now you can deploy the clickhouse service with `fly deploy`.
 
 ## Configure the plausible app and postgres service
