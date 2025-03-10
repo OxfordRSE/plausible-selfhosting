@@ -1,0 +1,1 @@
+FROM plausible/analytics:latest

@@ -1,0 +1,64 @@
+# fly.toml app configuration file generated for plausible-oxrse on 2025-03-05T14:18:20Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'plausible-oxrse-2'
+primary_region = 'lhr'
+kill_signal = 'SIGTERM'
+kill_timeout = '5s'
+
+[experimental]
+  auto_rollback = true
+
+[build]
+
+[deploy]
+release_command = 'db migrate'
+
+[env]
+  CLICKHOUSE_DATABASE_URL = 'http://plausible-clickhouse-oxrse.internal:8123/plausible_events_db'
+  CLICKHOUSE_DATABASE = 'plausible_events_db'
+  BASE_URL = "https://plausible-oxrse.fly.dev"
+  ECTO_CH_IPV6 = 'true'
+  ECTO_IPV6 = 'true'
+
+[[mounts]]
+  source = 'plausible_geodata'
+  destination = '/data'
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 8000
+  processes = ['app']
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.tcp_checks]]
+    interval = '15s'
+    timeout = '2s'
+    grace_period = '30s'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
