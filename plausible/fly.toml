@@ -61,4 +61,4 @@ release_command = 'db migrate'
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
-  cpus = 1
+  cpus = 2
