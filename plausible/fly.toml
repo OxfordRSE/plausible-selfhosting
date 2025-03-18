@@ -22,6 +22,12 @@ release_command = 'db migrate'
   BASE_URL = "https://plausible-oxrse.fly.dev"
   ECTO_CH_IPV6 = 'true'
   ECTO_IPV6 = 'true'
+  MAILER_EMAIL = "plausible-analytics@oxrse.uk"
+  MAILER_NAME = "OxRSE Plausible Analytics"
+  SMTP_HOST_ADDR = "email-smtp.eu-west-2.amazonaws.com"
+  SMTP_HOST_PORT = "465"
+  SMTP_USER_NAME = "AKIATCKARLGNOPTNXF4S"
+  SMTP_HOST_SSL_ENABLED = "true"
 
 [[mounts]]
   source = 'plausible_geodata'
